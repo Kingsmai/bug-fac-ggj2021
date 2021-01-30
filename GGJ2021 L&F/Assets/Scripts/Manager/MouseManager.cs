@@ -7,21 +7,18 @@ using System;
 //舍弃拖拽关联的方式，就不用这样序列化事件了
 //[System.Serializable]
 //public class EventVector3 : UnityEvent<Vector3> { }
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
-    public static MouseManager Instance;
+   // public static MouseManager Instance;
 
-    
     RaycastHit hitInfo;
     //public EventVector3 OnMouseClicked;
     public event Action<Vector3> OnMouseClicked;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-            Destroy(gameObject);
-
-        Instance = this;
+        base.Awake();
+        //DontDestroyOnLoad(this);
     }
 
     public void Update()

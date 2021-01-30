@@ -6,10 +6,12 @@ using UnityEngine.AI;
 public class PlayerControl : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private CharacterStats characterStats;
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        
+        //anim = GetComponent<Animator>();
+        characterStats = GetComponent<CharacterStats>();
 
     }
 
@@ -24,6 +26,8 @@ public class PlayerControl : MonoBehaviour
         //向MouseManager注册方法
         //注册方法的定义格式必须和类中的事件格式相同（参数）
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
+
+        GameManager.Instance.RigisterPlayer(characterStats);
     }
 
 }
